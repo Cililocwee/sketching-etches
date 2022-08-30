@@ -1,0 +1,11 @@
+.board {
+    width: 500px;
+    height: 500px;
+    display: grid;
+}
+
+.square {
+    background-color: blue;
+    border: .5px solid gray;
+}
+
