@@ -6,9 +6,20 @@ function genBoard(number){
     board.style.gridTemplateColumns = `repeat(${number}, 1fr)`;
     board.style.gridTemplateRows = `repeat(${number}, 1fr)`;
 
+    // important - this each listener needs to be attached at this point
     for (let i = 0; i < (number * number); i++){
         let square = document.createElement('div');
         square.addEventListener('mouseenter', () => {
+            if (prideFlag){
+                selectRainbow();
+                square.style.backgroundColor = `${currentColor}`;
+            } else {
+            square.style.backgroundColor = `${currentColor}`;
+            }
+        })
+
+        //trying to add implementation for touch, currently not working
+        square.addEventListener('touchenter', () => {
             if (prideFlag){
                 selectRainbow();
                 square.style.backgroundColor = `${currentColor}`;
@@ -30,16 +41,19 @@ function refreshBoard(){
 
 function selectBlack(){
     currentColor = "black";
+    prideFlag = false;
     //console.log(currentColor); //debugging purposes
 }
 
 function selectRed(){
     currentColor = "red";
+    prideFlag = false;
     //console.log(currentColor); //debugging purposes
 }
 
 function selectWhite(){
     currentColor = "white";
+    prideFlag = false;
     //console.log(currentColor); //debugging purposes
 }
 
@@ -75,5 +89,5 @@ function changeSize(input){
     }
 }
 
-genBoard(16); //default size on render
+genBoard(20); //default size on render
 
