@@ -9,7 +9,12 @@ function genBoard(number){
     for (let i = 0; i < (number * number); i++){
         let square = document.createElement('div');
         square.addEventListener('mouseenter', () => {
-            square.style.backgroundColor = "black";
+            if (prideFlag){
+                selectRainbow();
+                square.style.backgroundColor = `${currentColor}`;
+            } else {
+            square.style.backgroundColor = `${currentColor}`;
+            }
         })
         square.className = "square";
         board.insertAdjacentElement("beforeend", square);
@@ -18,27 +23,57 @@ function genBoard(number){
 
 function refreshBoard(){
     const resetbtn = document.getElementById("inputfield");
+    currentColor = "";
+    prideFlag = false;
     genBoard(resetbtn.value);
 }
 
-// nowhere near working
-function clearBoard(){
-    const squares = document.getElementsByClassName("square");
-    for (const square of squares){
-        if (square.backgroundColor != "blue"){
-            square.backgroundColor = "blue"
-        }
-    }
-};
+function selectBlack(){
+    currentColor = "black";
+    //console.log(currentColor); //debugging purposes
+}
 
+function selectRed(){
+    currentColor = "red";
+    //console.log(currentColor); //debugging purposes
+}
+
+function selectWhite(){
+    currentColor = "white";
+    //console.log(currentColor); //debugging purposes
+}
+
+function selectRainbow(){
+    let rainbow = ['red','orange','yellow','green','blue','indigo','violet'];
+    let leprachaun = Math.floor(Math.random()*rainbow.length);
+    currentColor = rainbow[leprachaun];
+    //console.log(currentColor); //debugging purposes
+    if (prideFlag === false){currentColor = ""};
+}
+
+let prideFlag = false;
+const potOfGold = document.getElementById("rainbow");
+
+//toggles rainbow mode
+potOfGold.addEventListener('click', () => {
+    if (prideFlag){
+        prideFlag = false;
+        currentColor = "nope"; //stops the rainbow
+    } else {
+        prideFlag = true;
+    }
+    //console.log(prideFlag); //debugging purposes
+})
+
+let currentColor = ""; //default nothing
 
 function changeSize(input){
     if (input < 2 || input > 100){
         console.log('Error');
     } else {
-    genBoard(input);
+    genBoard(input,currentColor);
     }
 }
 
-genBoard(16);
+genBoard(16); //default size on render
 
