@@ -1,2 +1,3 @@
 # sketching-etches
-Second take at the Odin Project etch-a-sketch project
+Full working release of my etch-a-sketch simulator
+- TOP Project -
